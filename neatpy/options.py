@@ -1,5 +1,6 @@
 from .activations import sigmoid
 
+
 class Options:
 
     @staticmethod
@@ -18,7 +19,7 @@ class Options:
         disjoint_coeff=1,
         weight_coeff=0.5,
 
-        add_node_prob=0.02,
+        add_node_prob=0.001,
         add_conn_prob=0.05,
 
         weight_mutate_prob=0.1,
@@ -91,8 +92,8 @@ class Options:
         Options.disjoint_coeff = disjoint_coeff
         Options.weight_coeff = weight_coeff
 
-        Options.add_node_prob = add_node_prob     
-        Options.add_conn_prob = add_conn_prob   
+        Options.add_node_prob = add_node_prob
+        Options.add_conn_prob = add_conn_prob
 
         Options.weight_mutate_prob = weight_mutate_prob
         Options.new_weight_prob = new_weight_prob

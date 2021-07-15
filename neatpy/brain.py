@@ -77,7 +77,7 @@ class Brain:
                 )
             )
         else:
-            for node1 in input_nodes + bias_nodes:
+            for node1 in bias_nodes + input_nodes:
                 for node2 in output_nodes:
                     self.connections.append(
                         Connection(

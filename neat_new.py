@@ -2,7 +2,7 @@ import random
 import math
 import copy
 
-random.seed(11)
+random.seed(10)
 
 
 def sigmoid(x):
@@ -29,7 +29,7 @@ class Options:
         disjoint_coeff=1,
         weight_coeff=0.5,
 
-        add_node_prob=0.02,
+        add_node_prob=0.001,
         add_conn_prob=0.05,
 
         weight_mutate_prob=0.1,
@@ -114,7 +114,7 @@ class Node:
         for i in range(Options.num_outputs):
             Node.pos[Options.num_inputs + i + 1] = 1, 0
 
-        InnovTable.set_node_id(Options.num_inputs + Options.num_outputs + 1)
+        InnovTable.node_id = Options.num_inputs + Options.num_outputs + 1
 
     @staticmethod
     def set_pos(node_id, fr, to):
@@ -163,10 +163,6 @@ class InnovTable:
     node_id = 0
 
     @staticmethod
-    def set_node_id(node_id):
-        InnovTable.node_id = max(InnovTable.node_id, node_id)
-
-    @staticmethod
     def _create_innov(fr, to, new_conn):
         if new_conn:
             innovation = Innovation(InnovTable.innov, new_conn, fr, to)
@@ -203,8 +199,6 @@ class Brain:
 
         node_id = 0
 
-        self.nodes = []
-
         bias_nodes = []
         input_nodes = []
         output_nodes = []
@@ -223,7 +217,7 @@ class Brain:
         self.nodes = bias_nodes + input_nodes + output_nodes
         self.connections = []
 
-        for node1 in input_nodes + bias_nodes:
+        for node1 in bias_nodes + input_nodes:
             for node2 in output_nodes:
                 self.connections.append(
                     Connection(
@@ -232,6 +226,8 @@ class Brain:
                         InnovTable.get_innov(node1, node2).innov
                     )
                 )
+
+        self.connections.sort(key=lambda x: x.fr)
 
     def _add_conn(self):
         valid = []

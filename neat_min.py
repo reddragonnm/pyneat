@@ -3,7 +3,7 @@ import enum
 import math
 import copy
 
-random.seed(11)
+random.seed(10)
 
 
 def sigmoid(x):
@@ -30,7 +30,7 @@ class Options:
         disjoint_coeff=1,
         weight_coeff=0.5,
 
-        add_node_prob=0.02,
+        add_node_prob=0.001,
         add_conn_prob=0.05,
 
         weight_mutate_prob=0.1,

@@ -9,7 +9,7 @@ from pygame.color import THECOLORS as colors
 pg.init()
 screen = pg.display.set_mode((400, 400))
 
-Options.set_options(2, 1, 150, 3.9)
+Options.set_options(2, 1, 150, 3.9, add_node_prob=0.001)
 
 p = Population()
 
@@ -41,5 +41,5 @@ while p.best.fitness < max_fitness:
 
     pg.display.update()
 
-save_brain(p.best, 'brain_test')
-pg.image.save(screen, 'file.png')
+print([i.id for i in p.best.nodes], len(p.best.nodes))
+print([(i.fr, i.to) for i in p.best.connections], len(p.best.connections))
